@@ -7,9 +7,10 @@ type=$(jq -r '.types[0].type.name' data.json)
 
 # Convert units
 formatted_height=$(awk "BEGIN {printf \"%.1f\", $height / 10}")
-formatted_weight_raw=$(awk "BEGIN {printf \"%d\", $weight / 10}")  # integer only
+formatted_weight=$(awk "BEGIN {printf \"%d\", $weight / 10}")  # integer only
 
-capitalized_name=$(echo "$name" | sed 's/.*/\u&/')
-capitalized_type=$(echo "$type" | sed 's/.*/\u&/')
+# Capitalize first letter of name and type using parameter expansion
+name="${name^}"
+type="${type^}"
 
-echo "$capitalized_name is of type $capitalized_type, weighs ${formatted_weight_raw}kg, and is ${formatted_height}m tall."
+echo "$name is of type $type, weighs ${formatted_weight}kg, and is ${formatted_height}m tall."
