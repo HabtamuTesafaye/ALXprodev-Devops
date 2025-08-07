@@ -1,0 +1,9 @@
+#!/bin/bash
+
+name=$(jq -r '.name' data.json)
+height=$(jq -r '.height' data.json)
+weight=$(jq -r '.weight' data.json)
+type=$(jq -r '.types[0].type.name' data.json)
+
+# Convert height decimeters → meters, weight hectograms → kg
+echo "$(echo "$name" | sed 's/.*/\u&/') is of type $(echo "$type" | sed 's/.*/\u&/'), weighs $(awk "BEGIN {print $weight / 10}")kg, and is $(awk "BEGIN {print $height / 10}")m tall."

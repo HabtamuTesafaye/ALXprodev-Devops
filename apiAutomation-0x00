@@ -1,0 +1,8 @@
+#!/bin/bash
+
+URL="https://pokeapi.co/api/v2/pokemon/pikachu"
+curl -s -o data.json --fail "$URL"
+
+if [ $? -ne 0 ]; then
+  echo "Failed to fetch Pikachu data at $(date)" >> errors.txt
+fi
