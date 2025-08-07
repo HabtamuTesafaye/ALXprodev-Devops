@@ -6,15 +6,10 @@ weight=$(jq -r '.weight' data.json)
 type=$(jq -r '.types[0].type.name' data.json)
 
 # Convert units
-formatted_height=$(awk "BEGIN {printf \"%.1f\", $height / 10}")  # meters, 1 decimal
-formatted_weight=$(awk "BEGIN {printf \"%.1f\", $weight / 10}")  # kg, 1 decimal
+formatted_height=$(awk "BEGIN {printf \"%.1f\", $height / 10}")
+formatted_weight_raw=$(awk "BEGIN {printf \"%d\", $weight / 10}")  # integer only
 
-# Capitalize first letter of name and type
 capitalized_name=$(echo "$name" | sed 's/.*/\u&/')
 capitalized_type=$(echo "$type" | sed 's/.*/\u&/')
 
-# Construct message
-message="$capitalized_name is of type $capitalized_type, weighs ${formatted_weight}kg, and is ${formatted_height}m tall."
-
-# Output the message
-echo "$message"
+echo "$capitalized_name is of type $capitalized_type, weighs ${formatted_weight_raw}kg, and is ${formatted_height}m tall."
