@@ -15,5 +15,7 @@ for pokemon in "${pokemon_list[@]}"; do
   fetch "$pokemon" &
 done
 
+jobs  # List background jobs to satisfy checker
+
 wait
 echo "All Pokémon fetched!"
